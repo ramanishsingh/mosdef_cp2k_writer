@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 Welcome to mosdef_cp2k_writer's documentation!
-=====================================
+==============================================
 
 Overview
 ^^^^^^^^
