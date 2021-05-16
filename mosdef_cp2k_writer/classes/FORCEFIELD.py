@@ -1,7 +1,12 @@
 import datetime
 import mosdef_cp2k_writer.utilities as utilities
 from mosdef_cp2k_writer.classes import SPLINE
-
+from mosdef_cp2k_writer.classes import BENDs
+from mosdef_cp2k_writer.classes import BONDs
+from mosdef_cp2k_writer.classes import CHARGEs
+from mosdef_cp2k_writer.classes import NONBONDED
+from mosdef_cp2k_writer.utilities1 import oneDimArray as oda
+from mosdef_cp2k_writer.utilities1 import objectArray as oba
 
 BOOL_VALS = [".TRUE.", ".FALSE.", "TRUE", "FALSE"]
 
@@ -63,6 +68,17 @@ class FORCEFIELD:
             changeLog=self.__changeLog,
             location=self.__location,
         )
+        self.__BEND = None
+        self.__BOND = None
+        
+        self.__CHARGE = None
+        
+        self.__NONBONDED = NONBONDED.NONBONDED(
+            errorLog=self.__errorLog,
+            changeLog=self.__changeLog,
+            location=self.__location,
+        )
+
 
     @property
     def errorLog(self):
@@ -87,7 +103,83 @@ class FORCEFIELD:
     @property
     def SPLINE(self):
         return self.__SPLINE
+    
+    @property
+    def BEND(self):
+        return self.__BEND
+    
+    
+    def init_bends(self, natomty):
+        BEND = []
+        for i in range(natomty):
+            BEND.append(
+                BENDs.BENDs(
+                    number=i + 1,
+                    errorLog=self.__errorLog,
+                    changeLog=self.__changeLog,
+                    location=self.__location,
+                )
+            )
+        self.__BEND = oba.objectArray.listToOBA(
+            BEND,
+            errorLog=self.__errorLog,
+            changeLog=self.__changeLog,
+            location=self.__location,
+        )
 
+    
+    @property
+    def BOND(self):
+        return self.__BOND
+    
+    def init_bonds(self, natomty):
+        BOND = []
+        for i in range(natomty):
+            BOND.append(
+                BONDs.BONDs(
+                    number=i + 1,
+                    errorLog=self.__errorLog,
+                    changeLog=self.__changeLog,
+                    location=self.__location,
+                )
+            )
+        self.__BOND = oba.objectArray.listToOBA(
+            BOND,
+            errorLog=self.__errorLog,
+            changeLog=self.__changeLog,
+            location=self.__location,
+        )
+
+    
+    
+    @property
+    def CHARGE(self):
+        return self.__CHARGE
+    
+    def init_charges(self, natomty):
+        CHARGE = []
+        for i in range(natomty):
+            CHARGE.append(
+                CHARGEs.CHARGEs(
+                    number=i + 1,
+                    errorLog=self.__errorLog,
+                    changeLog=self.__changeLog,
+                    location=self.__location,
+                )
+            )
+        self.__CHARGE = oba.objectArray.listToOBA(
+            CHARGE,
+            errorLog=self.__errorLog,
+            changeLog=self.__changeLog,
+            location=self.__location,
+        )
+
+        
+    @property
+    def NONBONDED(self):
+        return self.__NONBONDED
+    
+    
     @PARMTYPE.setter
     def PARMTYPE(self, val):
         val = str(val).upper()

@@ -1,0 +1,115 @@
+&FORCE_EVAL
+  METHOD        FIST
+  &MM        
+    &FORCEFIELD        
+      &SPLINE        
+      &END SPLINE        
+      &BOND        
+        ATOMS        Ar Ar
+        K        1
+        ATOMS        Ar Ar
+        K        1
+      &END BOND        
+      &CHARGE        
+        CHARGE        1
+        CHARGE        1
+      &END CHARGE        
+      &NONBONDED        
+        &LENNARD-JONES        
+          SIGMA        2
+        &END LENNARD-JONES        
+        &LENNARD-JONES        
+          RCUT        7
+        &END LENNARD-JONES        
+      &END NONBONDED        
+    &END FORCEFIELD        
+    &POISSON       
+      &EWALD        
+      &END EWALD        
+    &END POISSON        
+  &END MM        
+  &DFT        
+    &MGRID        
+    &END MGRID        
+    &QS        
+    &END QS        
+    &POISSON        
+      &EWALD        
+      &END EWALD        
+    &END POISSON        
+    &PRINT         
+    &END PRINT        
+    &SCF        
+    &END SCF        
+    &XC        
+      &VDW_POTENTIAL        
+        &PAIR_POTENTIAL        
+        &END PAIR_POTENTIAL        
+      &END VDW_POTENTIAL        
+      &XC_GRID        
+      &END XC_GRID        
+    &END XC        
+  &END DFT        
+  &SUBSYS        
+    &CELL        
+    &END CELL        
+    &COORD        
+    &END COORD        
+    &TOPOLOGY        
+      &MOL_SET       
+      &END MOL_SET       
+    &END TOPOLOGY       
+  &END SUBSYS        
+&END FORCE_EVAL        
+&GLOBAL
+  RUN_TYPE     MC
+  PROJECT      test_bias
+  PRINT_LEVEL  LOW
+  SEED  2
+&END GLOBAL
+&MOTION
+  &MC
+    &AVBMC
+    &END AVBMC
+    &MAX_DISPLACEMENTS
+      &BOX_DISPLACEMENTS
+      &END BOX_DISPLACEMENTS
+      &MOL_DISPLACEMENTS
+      &END MOL_DISPLACEMENTS
+    &END MAX_DISPLACEMENTS
+    &MOVE_PROBABILITIES
+      &BOX_PROBABILITIES
+      &END BOX_PROBABILITIES
+      &MOL_PROBABILITIES
+      &END MOL_PROBABILITIES
+    &END MOVE_PROBABILITIES
+    &MOVE_UPDATES
+    &END MOVE_UPDATES
+  &END MC
+  &MD
+    &THERMOSTAT       
+    &END THERMOSTAT       
+    &AVERAGES       
+    &END AVERAGES       
+    &PRINT       
+      &ENERGY       
+        &EACH       
+        &END EACH       
+      &END ENERGY       
+      &PROGRAM_RUN_INFO       
+        &EACH       
+        &END EACH       
+      &END PROGRAM_RUN_INFO     
+    &END PRINT       
+  &END MD
+ 
+  &CONSTRAINT
+    &FIXED_ATOMS      
+    &END FIXED_ATOMS       
+  &END CONSTRAINT
+ 
+  &PRINT 
+  &END PRINT 
+  &GEO_OPT 
+  &END GEO_OPT 
+&END MOTION 

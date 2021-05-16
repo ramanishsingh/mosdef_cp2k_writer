@@ -75,6 +75,105 @@ def write_input(SimObject):
             )
 
         inputFile += "      &END SPLINE        \n"
+        
+        
+        
+        
+        if force.MM.FORCEFIELD.BEND  is not None:
+            inputFile += "      &BEND        \n"
+            for i in range(force.MM.FORCEFIELD.BEND.length):
+                if force.MM.FORCEFIELD.BEND[i + 1].ATOMS is not None:
+                    inputFile += "        ATOMS        {}\n".format(force.MM.FORCEFIELD.BEND[i + 1].ATOMS)
+                if force.MM.FORCEFIELD.BEND[i + 1].CB is not None:
+                    inputFile += "        CB        {}\n".format(force.MM.FORCEFIELD.BEND[i + 1].CB)
+                if force.MM.FORCEFIELD.BEND[i + 1].K is not None:
+                    inputFile += "        K        {}\n".format(force.MM.FORCEFIELD.BEND[i + 1].K)
+                if force.MM.FORCEFIELD.BEND[i + 1].KBS12 is not None:
+                    inputFile += "        KBS12        {}\n".format(force.MM.FORCEFIELD.BEND[i + 1].KBS12)
+                if force.MM.FORCEFIELD.BEND[i + 1].KBS32 is not None:
+                    inputFile += "        KBS32        {}\n".format(force.MM.FORCEFIELD.BEND[i + 1].KBS32)
+                if force.MM.FORCEFIELD.BEND[i + 1].KIND is not None:
+                    inputFile += "        KIND        {}\n".format(force.MM.FORCEFIELD.BEND[i + 1].KIND)
+                if force.MM.FORCEFIELD.BEND[i + 1].KSS is not None:
+                    inputFile += "        KSS        {}\n".format(force.MM.FORCEFIELD.BEND[i + 1].KSS)
+                if force.MM.FORCEFIELD.BEND[i + 1].LEGENDRE is not None:
+                    inputFile += "        LEGENDRE        {}\n".format(force.MM.FORCEFIELD.BEND[i + 1].LEGENDRE)
+                if force.MM.FORCEFIELD.BEND[i + 1].R012 is not None:
+                    inputFile += "        R012        {}\n".format(force.MM.FORCEFIELD.BEND[i + 1].R012)
+                if force.MM.FORCEFIELD.BEND[i + 1].R032 is not None:
+                    inputFile += "        R032        {}\n".format(force.MM.FORCEFIELD.BEND[i + 1].R032)
+                if force.MM.FORCEFIELD.BEND[i + 1].THETA0 is not None:
+                    inputFile += "        THETA0        {}\n".format(force.MM.FORCEFIELD.BEND[i + 1].THETA0)
+                    
+                
+        
+
+            inputFile += "      &END BEND        \n"
+        
+        
+        
+        if force.MM.FORCEFIELD.BOND  is not None:
+            inputFile += "      &BOND        \n"
+            for i in range(force.MM.FORCEFIELD.BOND.length):
+                if force.MM.FORCEFIELD.BOND[i + 1].ATOMS is not None:
+                    inputFile += "        ATOMS        {}\n".format(force.MM.FORCEFIELD.BOND[i + 1].ATOMS)
+                if force.MM.FORCEFIELD.BOND[i + 1].CS is not None:
+                    inputFile += "        CS        {}\n".format(force.MM.FORCEFIELD.BOND[i + 1].CS)
+                if force.MM.FORCEFIELD.BOND[i + 1].K is not None:
+                    inputFile += "        K        {}\n".format(force.MM.FORCEFIELD.BOND[i + 1].K)
+                if force.MM.FORCEFIELD.BOND[i + 1].KIND is not None:
+                    inputFile += "        KIND        {}\n".format(force.MM.FORCEFIELD.BOND[i + 1].KIND)
+                if force.MM.FORCEFIELD.BOND[i + 1].R0 is not None:
+                    inputFile += "        R0        {}\n".format(force.MM.FORCEFIELD.BOND[i + 1].R0)
+                
+                    
+                
+        
+
+            inputFile += "      &END BOND        \n"
+        
+        
+        
+        if force.MM.FORCEFIELD.CHARGE  is not None:
+            inputFile += "      &CHARGE        \n"
+            for i in range(force.MM.FORCEFIELD.CHARGE.length):
+                if force.MM.FORCEFIELD.CHARGE[i + 1].ATOM is not None:
+                    inputFile += "        ATOM        {}\n".format(force.MM.FORCEFIELD.CHARGE[i + 1].ATOM)
+                if force.MM.FORCEFIELD.CHARGE[i + 1].CHARGE is not None:
+                    inputFile += "        CHARGE        {}\n".format(force.MM.FORCEFIELD.CHARGE[i + 1].CHARGE)
+                
+                    
+                
+        
+
+            inputFile += "      &END CHARGE        \n"
+        
+        if force.MM.FORCEFIELD.NONBONDED.LENNARD_JONES  is not None:
+            inputFile += "      &NONBONDED        \n"
+            for i in range(force.MM.FORCEFIELD.NONBONDED.LENNARD_JONES.length):
+                inputFile += "        &LENNARD-JONES        \n"
+                if force.MM.FORCEFIELD.NONBONDED.LENNARD_JONES[i + 1].ATOMS is not None:
+                    inputFile += "          ATOMS        {}\n".format(force.MM.FORCEFIELD.NONBONDED.LENNARD_JONES[i + 1].ATOMS)
+                if force.MM.FORCEFIELD.NONBONDED.LENNARD_JONES[i + 1].EPSILON is not None:
+                    inputFile += "          EPSILON        {}\n".format(force.MM.FORCEFIELD.NONBONDED.LENNARD_JONES[i + 1].EPSILON)
+                if force.MM.FORCEFIELD.NONBONDED.LENNARD_JONES[i + 1].RCUT is not None:
+                    inputFile += "          RCUT        {}\n".format(force.MM.FORCEFIELD.NONBONDED.LENNARD_JONES[i + 1].RCUT)
+                if force.MM.FORCEFIELD.NONBONDED.LENNARD_JONES[i + 1].RMIN is not None:
+                    inputFile += "          RMIN        {}\n".format(force.MM.FORCEFIELD.NONBONDED.LENNARD_JONES[i + 1].RMIN)    
+                if force.MM.FORCEFIELD.NONBONDED.LENNARD_JONES[i + 1].RMAX is not None:
+                    inputFile += "          RMAX        {}\n".format(force.MM.FORCEFIELD.NONBONDED.LENNARD_JONES[i + 1].RMAX)
+                if force.MM.FORCEFIELD.NONBONDED.LENNARD_JONES[i + 1].SIGMA is not None:
+                    inputFile += "          SIGMA        {}\n".format(force.MM.FORCEFIELD.NONBONDED.LENNARD_JONES[i + 1].SIGMA)
+                    
+
+                inputFile += "        &END LENNARD-JONES        \n"
+        
+            inputFile += "      &END NONBONDED        \n"
+        
+        
+        
+        
+        
         inputFile += "    &END FORCEFIELD        \n"
         inputFile += "    &POISSON       \n"
         if force.MM.POISSON.PERIODIC is not None:
